@@ -1,9 +1,10 @@
 import pybaseball as pb
 import pandas as pd
+from injury_list import clean_injury_list
 
 TRAINING_YEAR = 2025
 CURRENT_DT = '2026-04-05'
-DIRECTORY = 'data/raw'
+DIRECTORY = 'data/raw/'
 
 def download_statcast():
 
@@ -25,8 +26,8 @@ def download_metrics():
 
 def download_injury():
 
-    url = "https://www.espn.com/mlb/injuries"
-    injury_data = pd.read_html(url)
+    injured_players_data = clean_injury_list("https://www.espn.com/mlb/injuries")   
+    injured_players_data.to_csv(f'{DIRECTORY}injured_players_data_2026.csv')
 
 def download_laham(): pb.download_lahman()
 
